@@ -56,6 +56,7 @@ int main() {
     }
     cout<<endl;
     SortTestHelper::printArray(arr, n);
+    SortTestHelper::testSort("Selection Sort", selectionSort, arr, n);
     delete[] arr;
     return 0;
 }
