@@ -46,15 +46,23 @@ void __merge(T arr[], int l, int mid, int r) {
 template<typename T>
 void __mergeSort(T arr[], int l, int r) {
     //处理递归到底的情况
-    if(l >= r) {
+//    if(l >= r) {
+//        return;
+//    }
+    if(r - l <= 15) {
+        insertionSort(arr, l, r);
         return;
     }
 
     int mid = (r-l)/2 + l;
     __mergeSort(arr, l, mid);
     __mergeSort(arr, mid+1, r);
-    //归并操作
-    __merge(arr, l, mid, r);
+    //1.第一个优化
+    if(arr[mid] > arr[mid+1]) {
+        //归并操作
+        __merge(arr, l, mid, r);
+    }
+
 }
 
 template<typename T>
@@ -73,5 +81,15 @@ int main() {
 
     delete[] arr1;
     delete[] arr2;
+
+    int swapTimes = 0;
+    arr1 = SortTestHelper::generateNearlyOrderedArray(n, swapTimes);
+    arr2 = SortTestHelper::copyIntArray(arr1, n);
+    SortTestHelper::testSort("Insertion Sort", insertionSort, arr1, n);
+    SortTestHelper::testSort("Merge Sort", mergeSort, arr2, n);
+
+    delete[] arr1;
+    delete[] arr2;
+
     return 0;
 }
