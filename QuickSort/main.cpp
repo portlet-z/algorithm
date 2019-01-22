@@ -8,6 +8,7 @@ using namespace std;
 //返回 p,使得 arr[l...p-1] < arr[p]; arr[p+1...r] > arr[p]
 template<typename T>
 int __partition(T arr[], int l, int r) {
+    swap(arr[rand() % (r-l+1) + l],arr[l]);
     T v = arr[l];
     // arr[l+1...j] < v; arr[j+1...i) > v
     int j = l;
@@ -26,7 +27,11 @@ int __partition(T arr[], int l, int r) {
 //对 arr[l...r]部分进行快速排序
 template<typename T>
 void __quickSort(T arr[], int l, int r){
-    if(l >= r) {
+//    if(l >= r) {
+//        return;
+//    }
+    if(r - l <= 15) {
+        insertionSort(arr, l, r);
         return;
     }
     int p = __partition(arr, l, r);
@@ -36,12 +41,13 @@ void __quickSort(T arr[], int l, int r){
 
 template<typename T>
 void quickSort(T arr[], int n) {
+    srand(time(NULL));
     __quickSort(arr, 0, n);
 }
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    int n = 2000000;
+    int n = 1000000;
     int* arr1 = SortTestHelper::generateRandomArray(n, 0, n);
     int* arr2 = SortTestHelper::copyIntArray(arr1, n);
 
@@ -50,5 +56,14 @@ int main() {
 
     delete[] arr1;
     delete[] arr2;
+
+    int swapTimes = 100;
+    arr1 = SortTestHelper::generateNearlyOrderedArray(n, swapTimes);
+    arr2 = SortTestHelper::copyIntArray(arr1, n);
+    SortTestHelper::testSort("MergeSort", mergeSort, arr1, n);
+    SortTestHelper::testSort("QuickSort", quickSort, arr2, n);
+    delete[] arr1;
+    delete[] arr2;
+
     return 0;
 }
