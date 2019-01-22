@@ -1,3 +1,9 @@
+//
+// Created by 张新征 on 2019-01-22.
+//
+
+#ifndef QUICKSORT2_QUICKSORT_H
+#define QUICKSORT2_QUICKSORT_H
 #include <iostream>
 #include "SortTestHelper.h"
 #include "MergeSort.h"
@@ -44,35 +50,4 @@ void quickSort(T arr[], int n) {
     srand(time(NULL));
     __quickSort(arr, 0, n);
 }
-
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    int n = 1000000;
-    int* arr1 = SortTestHelper::generateRandomArray(n, 0, n);
-    int* arr2 = SortTestHelper::copyIntArray(arr1, n);
-
-    SortTestHelper::testSort("MergeSort", mergeSort, arr1, n);
-    SortTestHelper::testSort("QuickSort", quickSort, arr2, n);
-
-    delete[] arr1;
-    delete[] arr2;
-
-    int swapTimes = 100;
-    arr1 = SortTestHelper::generateNearlyOrderedArray(n, swapTimes);
-    arr2 = SortTestHelper::copyIntArray(arr1, n);
-    SortTestHelper::testSort("MergeSort", mergeSort, arr1, n);
-    SortTestHelper::testSort("QuickSort", quickSort, arr2, n);
-    delete[] arr1;
-    delete[] arr2;
-
-    arr1 = SortTestHelper::generateRandomArray(n, 0, 10);
-    arr2 = SortTestHelper::copyIntArray(arr1, n);
-
-    SortTestHelper::testSort("MergeSort", mergeSort, arr1, n);
-    SortTestHelper::testSort("QuickSort", quickSort, arr2, n);
-
-    delete[] arr1;
-    delete[] arr2;
-
-    return 0;
-}
+#endif //QUICKSORT2_QUICKSORT_H
