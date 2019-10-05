@@ -17,7 +17,7 @@ public class AlgorithmFrame extends JFrame {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
 
-        AlgoCanvas canvas = new AlgoCanvas();
+        AlgorithmCanvas canvas = new AlgorithmCanvas();
         setContentPane(canvas);
 
         setResizable(false);
@@ -36,16 +36,15 @@ public class AlgorithmFrame extends JFrame {
     public int getCanvasWidth(){return canvasWidth;}
     public int getCanvasHeight(){return canvasHeight;}
 
-    // TODO: 设置自己的数据
-    private Object data;
-    public void render(Object data){
-        this.data = data;
+    private int[] money;
+    public void render(int[] money){
+        this.money = money;
         repaint();
     }
 
-    private class AlgoCanvas extends JPanel{
+    private class AlgorithmCanvas extends JPanel{
 
-        public AlgoCanvas(){
+        public AlgorithmCanvas(){
             // 双缓存
             super(true);
         }
@@ -64,7 +63,16 @@ public class AlgorithmFrame extends JFrame {
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            // TODO： 绘制自己的数据data
+            int w = canvasWidth / money.length;
+            for (int i=0; i<money.length; i++) {
+                if (money[i] > 0) {
+                    AlgorithmVisualHelper.setColor(g2d, AlgorithmVisualHelper.Blue);
+                    AlgorithmVisualHelper.fillRectangle(g2d, i*w + 1, canvasHeight/2-money[i], w-1, money[i]);
+                } else if (money[i] < 0) {
+                    AlgorithmVisualHelper.setColor(g2d, AlgorithmVisualHelper.Red);
+                    AlgorithmVisualHelper.fillRectangle(g2d, i*w + 1, canvasHeight/2, w-1, -money[i]);
+                }
+            }
         }
 
         @Override
