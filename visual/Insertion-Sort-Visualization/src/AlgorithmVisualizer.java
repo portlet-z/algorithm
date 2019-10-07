@@ -9,10 +9,10 @@ public class AlgorithmVisualizer {
     private AlgorithmFrame frame;
     private int DELAY = 40;
 
-    public AlgorithmVisualizer(int sceneWidth, int sceneHeight, int N){
+    public AlgorithmVisualizer(int sceneWidth, int sceneHeight, int N, InsertionSortData.Type type){
 
         // 初始化数据
-        data = new InsertionSortData(N, sceneHeight);
+        data = new InsertionSortData(N, sceneHeight, type);
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
@@ -49,7 +49,7 @@ public class AlgorithmVisualizer {
 
         int sceneWidth = 800;
         int sceneHeight = 800;
-        int N = 80;
-        AlgorithmVisualizer visualizer = new AlgorithmVisualizer(sceneWidth, sceneHeight, N);
+        int N = 100;
+        AlgorithmVisualizer visualizer = new AlgorithmVisualizer(sceneWidth, sceneHeight, N, InsertionSortData.Type.NEAR_ORDERED);
     }
 }
