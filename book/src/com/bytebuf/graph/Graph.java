@@ -2,6 +2,7 @@ package com.bytebuf.graph;
 
 import com.bytebuf.lang.Bag;
 import com.bytebuf.lang.In;
+import com.bytebuf.lang.StdOut;
 
 /**
  * @author: 张新征
@@ -70,5 +71,22 @@ public class Graph {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        Graph G = new Graph(new In("tinyG.txt"));
+        StdOut.println(G);
+        int s = 0;
+        DepthFirstSearch search = new DepthFirstSearch(G, s);
+        for (int v = 0; v < G.V(); v++) {
+            if (search.marked(v)) {
+                StdOut.print(v + " ");
+            }
+        }
+        StdOut.println();
+        if (search.count() != G.V()) {
+            StdOut.print("NOT ");
+        }
+        StdOut.print("connected");
     }
 }
