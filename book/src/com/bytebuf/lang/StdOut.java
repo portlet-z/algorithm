@@ -1,4 +1,4 @@
-/******************************************************************************
+package com.bytebuf.lang; /******************************************************************************
  *  Compilation:  javac StdOut.java
  *  Execution:    java StdOut
  *  Dependencies: none

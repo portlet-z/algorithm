@@ -1,4 +1,4 @@
-/******************************************************************************
+package com.bytebuf.lang; /******************************************************************************
  *  Compilation:  javac Bag.java
  *  Execution:    java Bag < input.txt
  *  Dependencies: StdIn.java StdOut.java
