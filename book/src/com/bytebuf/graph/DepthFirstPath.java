@@ -1,0 +1,59 @@
+package com.bytebuf.graph;
+
+import com.bytebuf.lang.In;
+import com.bytebuf.lang.StdOut;
+
+import java.util.Stack;
+
+/**
+ * @author: 张新征
+ * @date: 2020/10/20 7:41 上午
+ */
+public class DepthFirstPath {
+    private boolean[] marked;
+    private int[] edgeTo;
+    private final int s;
+
+    public DepthFirstPath(Graph G, int s) {
+        marked = new boolean[G.V()];
+        edgeTo = new int[G.V()];
+        this.s = s;
+        dfs(G, s);
+    }
+
+    private void dfs(Graph G, int v) {
+        marked[v] = true;
+        for (int w : G.adj(v)) {
+            if (!marked[w]) {
+                edgeTo[w] = v;
+                dfs(G, w);
+            }
+        }
+    }
+
+    public boolean hasPathTo(int v) {
+        return marked[v];
+    }
+
+    public Stack<Integer> pathTo(int v) {
+        if (!hasPathTo(v)) {
+            return null;
+        }
+        Stack<Integer> path = new Stack<>();
+        for (int x = v; x != s; x = edgeTo[x]) {
+            path.push(x);
+        }
+        path.push(s);
+        return path;
+    }
+
+    public static void main(String[] args) {
+        Graph G = new Graph(new In("tinyCG.txt"));
+        StdOut.println(G);
+        DepthFirstPath dfp = new DepthFirstPath(G, 0);
+        Stack<Integer> stack = dfp.pathTo(5);
+        while (!stack.empty()) {
+            System.out.println(stack.pop());
+        }
+    }
+}
