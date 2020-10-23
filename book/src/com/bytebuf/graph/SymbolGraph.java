@@ -58,7 +58,7 @@ public class SymbolGraph {
     }
 
     public static void main(String[] args) {
-        SymbolGraph symbolGraph = new SymbolGraph("movie.txt", ",");
+        SymbolGraph symbolGraph = new SymbolGraph("routes.txt", " ");
         StdOut.println(symbolGraph.G());
     }
 }
