@@ -1,6 +1,7 @@
 package com.bytebuf.graph;
 
 import com.bytebuf.lang.In;
+import com.bytebuf.lang.StdOut;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,5 +55,10 @@ public class SymbolGraph {
 
     public Graph G() {
         return G;
+    }
+
+    public static void main(String[] args) {
+        SymbolGraph symbolGraph = new SymbolGraph("movie.txt", ",");
+        StdOut.println(symbolGraph.G());
     }
 }
